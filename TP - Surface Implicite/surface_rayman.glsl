@@ -111,11 +111,6 @@ float Substract(float a, float b)
     return a - b;
 }
 
-float Div(float a, float b)
-{
-    return min(a, 2.0 * T - b);
-}
-
 float Neg(float a)
 {
     return 2.0 * T - a;

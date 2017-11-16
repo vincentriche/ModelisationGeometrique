@@ -6,51 +6,60 @@ RICHE Vincent
 
 ## I. Squelettes
 
-Nous avons implémenté les squelettes des primitives *Segment*, *Disque*, *Cercle*, *Cube*, *Plan*. Nous avons aussi la primitive *Point* qui était la de base.  
+Nous avons implémenté les squelettes des primitives *Segment*, *Disque*, *Cercle*, *Cube*, *Plan*. La primitive *Point* étant déjà fourni.  
 Les résultats obtenus sont visibles dans la figure 1.
 ![Figure 1 : Squelettes](Skelettes.png)
-*<center>Figure 1 : Squelettes</center>*
+*<center>Figure 1 : Squelettes des primitives</center>*
 
-## III. Opérateurs
-Nous avons développé les opérateurs *Blend*, *BlendN*, *Union*, *Intersection*, *Négation*, *Minus*, *Soustraction*, *Division*.  
-La figure 2 montre nos résultats : le point est *Blend* avec le plan, le segment est *BlendN* (ici N = 5.0) avec le plan, le disque utilise l'*Union* avec le plan et le cercle utilise l'opérateur *Substract* avec un cube (à gauche) et l'opérateur *Minus* avec un autre cube (à droite). 
+## II. Opérateurs
+Nous avons développé les opérateurs *Blend*, *BlendN*, *Union*, *Intersection*, *Négation*, *Minus*, *Soustraction*.  
+La figure 2 montre nos résultats. Dans cette scène, nous avons les primitives et opérateurs suivants :
+- Le point est *Blend* avec le plan.
+- Le segment est *BlendN* (ici N = 5.0) avec le plan.
+- Le disque utilise l'*Union* avec le plan.
+- Le cercle utilise l'opérateur *Substract* avec un cube (à gauche) et l'opérateur *Minus* avec un autre cube (à droite). 
 ![Figure 2 : Opérateurs](Operateurs.png)
 *<center>Figure 2 : Opérateurs</center>*
 
 ## IV. Couleurs des objets
 
-Une fois tout nos objets créées, nous calculons leurs couleurs. Pour cela nous multiplions chaque fonction par la couleur désirée et divisons le tout par la somme des fonctions. Le calcul est donc le suivant pour trois fonctions: 
+Une fois tout nos objets créés, nous calculons leurs couleurs. Pour cela nous multiplions le potentiel de l'objet avec la couleur souhaitée et divisons le tout par la somme des potentiels de tous les objets dans la scène. Pour trois objets aux potentiels F1, F2, F3, la couleur final sera donc : 
 
 ```
     c = F1 * color1 + F2 * color2 + F3 * color3;
     c /= F1 + F2 + F3;
 ```
 
-La figure 3 illustre différentes couleurs sur différentes objets.
+La figure 3 illustre le calcul des couleurs par primitive. Il n'y a pas d'intersection dans la scène, les couleurs ne sont donc pas *Blend* entre les primitives.
 ![Figure 3 : Couleurs](Couleurs.png)
-*<center>Figure 3 : Couleurs</center>*
+*<center>Figure 3 : Couleurs par primitive</center>*
 
-## Animations d'objets
+## Animations
 
-Nous avons implémentées quatre types d'animations suivant le scale, la position et la rotation:
-- *Scale* : fait varier le scale au cours du temps en fonction du valeur minimum et maximum et d'une vitesse de transition. 
-- *Position* : fait varier la position d'un objet au cours du temps en fonction d'une position de début et de fin et d'une vitesse de transition.
-- *Rotation* : fait tourner un objet autour soit des axes des X ou des Z en fonction d'un radius et d'une vitesse de transition.
+Nous avons implémenté quatre types d'animation suivant le scale, la position et la rotation:
+- *Scale* : fait varier le scale au cours du temps en fonction d'une borne minimale et maximale ainsi que d'une vitesse. 
+- *Position* : fait varier la position d'un objet au cours du temps en fonction d'une position de début et de fin et d'une vitesse de déplacement.
+- *Rotation* : fait tourner un objet autour d'un axe à une certaine distance et à  certaine vitesse.
 
-## Optimisations 
+## Optimisation
 
+Nous avons améliorer l'algorithme de *Sphere Tracing* grâce à [cet article](http://erleuchtet.org/~cupe/permanent/enhanced_sphere_tracing.pdf).
+Grâce à cela, nous avons un speedup entre 1.5 et 2 sur nos machines respectives (GTX1050M et IntelHD4000).
 
+Nous avons également modifié manuellement la constante de Lipschitz pour trouver le bon rapport vitesse/qualité. Nous l'avons laissé à 2 dans le programme que nous avons rendu. Ce changement améliore encore les performances avec un speedup d'environ 1.5.
 
 
 ## V. Notre scène
-Nous avons décidées regroupant au mieux les différents squelettes, opérateurs, et animations que nous avons implémentés. Pour cela, nous avons fais le personnage Rayman accompagné de deux lucioles qui virevoltent autour de lui. la scène accompagné de quelques fleurs et de caisses en bois.
+Nous avons décidé de créer une scène montrant au mieux les différents squelettes, opérateurs, et animations que nous avons implémenté. Pour cela, nous avons modélisé le personnage de Rayman accompagné de deux lucioles qui virevoltent autour de lui. Pour remplir un peu le décor, nous avons également modélisé quelques fleurs et des caisses en bois.
 
-Nous avons 45 primitives, 7 animations, et 17 couleurs.
+La scène finale contient 45 primitives, 7 animations, et 17 couleurs différentes. Les performances obtenues sur nos machines respectives sont de l'ordre de 20 à 30 FPS. Toutes les primitives et tous les opérateurs ont été utilisé dans cette scène.
 
-La figure 4 montre un screenshot de notre scène. 
+La figure 4 montre le rendu final obtenu.
 ![Figure 4 : Scène](Scene.png)
-*<center>Figure 4 : Notre scène</center>*
+*<center>Figure 4 : La scène finale avec Rayman au centre, les fleurs à gauches, les lucioles au centre et les caisses en bois à droite</center>*
 
-Une démonstration du shader est aussi disponible à cette adresse : https://goo.gl/4yXEWc
+Le shader est accessible directement à cette adresse : [ShaderToy](https://goo.gl/4yXEWc)
 
 ## VI. Conclusion
+En conclusion, nous avons beaucoup aimé ce TP et sommes satisfait de la scène que nous rendons.
+Une amélioration possible aurait été de calculer la constante de Lipschitz à la main pour de meilleurs résultats.
