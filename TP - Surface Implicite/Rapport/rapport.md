@@ -48,6 +48,18 @@ Grâce à cela, nous avons un speedup entre 1.5 et 2 sur nos machines respective
 
 Nous avons également modifié manuellement la constante de Lipschitz pour trouver le bon rapport vitesse/qualité. Nous l'avons laissé à 2 dans le programme que nous avons rendu. Ce changement améliore encore les performances avec un speedup d'environ 1.5.
 
+Pour la fonction de falloff, nous avons calculé la dérivée première et seconde :
+$$$
+f(x) = (1 - x^2)^3
+$$$
+$$$
+f'(x) = -6x(1 - x^2)
+$$$
+$$$
+f''(x) = -30x^4 - 36x^2 - 6
+$$$
+
+f''(x) a une racine pour x = 0.45 environ. Cela représente un minimum de f'(x) dans l'intervalle [0, 1]. f'(0.45) = -1.72. Donc la constante de Lipschitz pour la fonction de falloff est 1.72. Il en va de même pour la fonction de Blob et les autres primitives à squelette qui utilise la distance euclidienne.
 
 ## V. Notre scène
 Nous avons décidé de créer une scène montrant au mieux les différents squelettes, opérateurs, et animations que nous avons implémenté. Pour cela, nous avons modélisé le personnage de Rayman accompagné de deux lucioles qui virevoltent autour de lui. Pour remplir un peu le décor, nous avons également modélisé quelques fleurs et des caisses en bois.
